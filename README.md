@@ -22,9 +22,9 @@ Now you may inject the included service, ```relativeDate``` into your controller
 example
 
 
-    relativeDate.set isoTime, fallbackFormat, function(relativeDate) {
+    relativeDate.set( isoTime, fallbackFormat, function(relativeDate) {
       $scope.modelObject.relTime = relativeDate;
-    };
+    });
 
 Your callback will be called once immediately, and again every 60 seconds.
 Angular's 2-way databinding will take care of updating the DOM everytime the value changes, assuming that you are binding your variable to a DOM element.
