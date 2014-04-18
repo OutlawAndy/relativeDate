@@ -9,6 +9,12 @@ eg. *"just now"*, *"about 1 minute ago"*, or *"yesterday"*
 
 checkout the [Demo](http://outlawandy.github.io/relativeDate/) to see it in action.
 
+
+available through ```bower```
+
+    bower install angular-relative
+
+
 ## Usage
 
 first declare ```relativeDate``` as a dependency of your module
