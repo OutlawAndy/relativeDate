@@ -7,6 +7,10 @@ Replaces iso-formated, date-time stamps with auto-updating, relative time labels
 
 eg. *"just now"*, *"about 1 minute ago"*, or *"yesterday"*
 
+checkout the [Demo](http://outlawandy.github.io/relativeDate/) to see it in action.
+
+## Usage
+
 first declare ```relativeDate``` as a dependency of your module
 
     angular.module("myApp",["relativeDate"])
