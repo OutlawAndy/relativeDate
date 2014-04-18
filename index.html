@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>RelativeDate</title>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.13.0/css/semantic.css" rel="stylesheet" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+    <script src="relativeDate.js"></script>
+  </head>
+  <body ng-app="MyApp">
+    <div class="ui grid">
+      <div class="column" ng-controller="AppCtrl">
+        <div class="ui piled segment" style="margin:100px auto;padding:100px;text-align:center;">
+          <h1 class="ui header"><a href="http://github.com/outlawandy/relativeDate">RelativeDate</a> Demo</h1>
+          <div class="ui horizontal icon divider">
+            <i class="teal time icon"></i>
+          </div>
+          <div class="ui stacked segment">
+            <div class="ui header">This page was loaded&nbsp;
+              <div class="ui teal label">{{relNow}}</div>
+            </div>
+          </div>
+          <div class="ui stacked segment">
+            <div class="ui header">1 day before this page loaded was &nbsp;
+              <div class="ui teal label">{{relDay}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var MyApp = angular.module('MyApp',['relativeDate'])
+      MyApp.controller('AppCtrl', function($scope, relativeDate) {
+        var now = new Date();
+        var day = new Date(now - 86400000);
+        var NowIso = now.toISOString();
+        var DayIso = day.toISOString();
+        relativeDate.set(NowIso, function(rel) {
+          $scope.relNow = rel;
+        });
+         relativeDate.set(DayIso, function(rel) {
+          $scope.relDay = rel;
+        });
+      });
+    </script>
+  </body>
+</html>
