@@ -1,6 +1,6 @@
 angular.module('relativeDate',[])
   .provider 'relativeDate', ->
-    _defaultFallbackFormat_ = "MMM d, yyyy" # April 18, 2014
+    _defaultFallbackFormat_ = "MMM d, yyyy" # Apr 18, 2014
     _cutoffDay_ = 22 # 3 weeks
     this.defaultFallbackFormat = (format) ->
       _defaultFallbackFormat_ = format
@@ -16,8 +16,8 @@ angular.module('relativeDate',[])
           return _defaultFallbackFormat_
 
       time_ago = (time, override) ->
-        date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," "))
-        diff = (((new Date()).getTime() - date.getTime() + ( date.getTimezoneOffset() * 60 * 1000 )) / 1000)
+        date = new Date(time || "")
+        diff = (((new Date()).getTime() - date.getTime()) / 1000)
         day_diff = Math.floor(diff / 86400)
         if ( isNaN(day_diff) || day_diff < 0 || day_diff >= _cutoffDay_ ) # if older than "_cutoffDay_" days, don't calculate a relative-time label
           return dateFilter(time, fallbackFormat(override)) # instead, use angular's dateFilter to return an absolute timestamp formated using the string assigned to "_fallbackFormat_"
@@ -31,7 +31,7 @@ angular.module('relativeDate',[])
           day_diff == 1 && "Yesterday" ||
           day_diff < 7 && day_diff + " days ago" ||
           day_diff == 7 && "a week ago" ||
-          day_diff < 22 && Math.ceil( day_diff / 7 ) + " weeks ago"
+          Math.ceil( day_diff / 7 ) + " weeks ago"
 
       return {
         set: (date, callback, optionalFormat) ->

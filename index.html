@@ -33,12 +33,10 @@
       MyApp.controller('AppCtrl', function($scope, relativeDate) {
         var now = new Date();
         var day = new Date(now - 86400000);
-        var NowIso = now.toISOString();
-        var DayIso = day.toISOString();
-        relativeDate.set(NowIso, function(rel) {
+        relativeDate.set(now, function(rel) {
           $scope.relNow = rel;
         });
-         relativeDate.set(DayIso, function(rel) {
+         relativeDate.set(day, function(rel) {
           $scope.relDay = rel;
         });
       });

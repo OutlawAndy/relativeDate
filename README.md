@@ -25,7 +25,7 @@ Now you may inject the included service, ```relativeDate``` into your controller
 
 ```relativeDate``` has one method, ```set``` which takes the following parameters.
 
-1. *(required)* the datetime stamp to be used. *must be in iso-format*
+1. *(required)* the datetime stamp to be used.
 2. *(required)* a callback function that will be called with one argument: the relative-date string calculated by the service
 3. *(optional)* a format string to override the default. (more on this later)
 
