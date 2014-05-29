@@ -14,7 +14,7 @@
       'dateFilter', '$interval', function(dateFilter, $interval) {
         var fallbackFormat, time_ago;
         fallbackFormat = function(formatOverride) {
-          if (formatOverride !== null) {
+          if (typeof formatOverride !== 'undefined') {
             return formatOverride;
           } else {
             return _defaultFallbackFormat_;
