@@ -10,7 +10,7 @@ angular.module('relativeDate',[])
 
     this.$get = [ 'dateFilter', '$interval', (dateFilter, $interval) ->
       fallbackFormat = (formatOverride) ->
-        if formatOverride != null
+        if typeof formatOverride != 'undefined'
           return formatOverride
         else
           return _defaultFallbackFormat_
