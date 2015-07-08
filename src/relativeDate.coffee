@@ -20,7 +20,7 @@ angular.module('relativeDate',[])
         diff = (((new Date()).getTime() - date.getTime()) / 1000)
         day_diff = Math.floor(diff / 86400)
         if ( isNaN(day_diff) || day_diff < 0 || day_diff >= _cutoffDay_ ) # if older than "_cutoffDay_" days, don't calculate a relative-time label
-          return dateFilter(time, fallbackFormat(override)) # instead, use angular's dateFilter to return an absolute timestamp formated using the string assigned to "_fallbackFormat_"
+          return dateFilter(date, fallbackFormat(override)) # instead, use angular's dateFilter to return an absolute timestamp formated using the string assigned to "_fallbackFormat_"
 
         return day_diff == 0 && (
           diff < 60 && "just now" ||
