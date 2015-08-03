@@ -56,7 +56,7 @@ angular.module('relativeDate',[])
         diff = (((new Date()).getTime() - date.getTime()) / 1000)
         day_diff = Math.floor(diff / 86400)
 
-        if isOlderThanCutoff(time) # if older than "_cutoffDay_" days, don't calculate a relative-time label
+        if isOlderThanCutoff(time)                          # if older than "_cutoffDay_" days, don't calculate a relative-time label
           return dateFilter(date, fallbackFormat(override)) # instead, use angular's dateFilter to return an absolute timestamp formated using the string assigned to "_fallbackFormat_"
 
         switch
@@ -81,17 +81,19 @@ angular.module('relativeDate',[])
             callback(time_ago date, optionalFormat)
           , 60000 # execute callback function every 60 seconds
 
-          _success = -> # success callback (not needed here) is called by the $interval promise when all iteration is complete - only possible if the optional 3rd arg (total iterations) was passed into $interval
+          _success = ->              # success callback (not needed here) is called by the $interval promise when all iteration is complete - only possible if the optional 3rd arg (total iterations) was passed into $interval
             return
-          _error = ->   # error callback is called by the $interval promise if iteration is canceled early
-            _cache_.slice(index,1)
-          _notice = ->  # notice callback is called by the $interval promise after each iteration
-            $interval.cancel(iterator) if isOlderThanCutoff(date) # kill $interval updates now if not using relative-time labels
+          _error = ->                # error callback is called by the $interval promise if iteration is canceled early
+            _cache_.slice(index,1)          # was canceled by user, so remove from cache
+          _notice = ->               # notice callback is called by the $interval promise after each iteration
+            if isOlderThanCutoff(date)      # if passed cuttoffDay (not using relative-time labels) then...
+              _cache_.slice(index,1)        # remove from cache and
+              $interval.cancel(iterator)    # kill $interval updates
 
           iterator.then(_success, _error, _notice)
 
-          callback(time_ago date, optionalFormat) # initial call to callback function.
-          return iterator   # return the promise object incase you plan on manualing canceling iteration at somepoint
+          callback(time_ago date, optionalFormat) # initial call to callback function happens immediately.
+          return iterator                         # return the promise so you can manualing cancel iteration at later ( like when your directive gets destroyed!!! )
       }
     ]
     return this
